@@ -2,8 +2,8 @@ import express from 'express';
 
 const routes = express.Router();
 
-routes.get('/', (req, res) => {
-    return res.json({ message: 'Hello Word'});
+routes.get('/api', (req, res) => {
+    return res.json({ message: 'Hello from server!'});
 });
 
 export default routes;
