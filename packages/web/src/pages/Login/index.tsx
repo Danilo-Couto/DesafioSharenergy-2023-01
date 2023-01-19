@@ -22,10 +22,10 @@ export default function Login() {
     e.preventDefault();
 
   if (user === 'desafiosharenergy' && password ==='sh@r3n3rgy') {
-        setLocalStorage('user', user);
-        return navigate('/main')
-      }
-    }
+      setLocalStorage('user', user);
+      return navigate('/main')
+    };
+  };
 
   return (
     <>
