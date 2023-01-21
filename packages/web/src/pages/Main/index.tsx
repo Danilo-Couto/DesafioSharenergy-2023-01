@@ -1,51 +1,55 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";
+import Pagination from "../../components/Pagination";
+import Users from "../../components/Users";
+import { USERS_PER_PAGE } from "../../utils/constants";
 
 export default function Main() {
-  const [users, setUsers] = useState('');
-  const [filters, setFilters] = useState('')
+  const [users, setUsers] = useState([]);
+  const [usersBase, setUsersBase] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filters, setFilters] = useState('');
 
   useEffect(() => {
-    try {
-      axios.get("https://randomuser.me/api/?results=10")
-        .then(res => setUsers(res.data.results));
-    } catch {
-      ((err: any)=> console.log(err))
-    }
+    setIsLoading(true);
+    axios
+      .get('https://randomuser.me/api/?page=1&results=100')
+      .then(response => {
+        const result = response.data.results;
+        setUsers(result);
+        setUsersBase(result);
+        setTotalPages(Math.ceil(result.length / USERS_PER_PAGE));
+        setIsLoading(false);
+      });
   }, []);
 
-  console.log(users)
+  const handleClick = number => {
+    setPage(number);
+  };
 
   return (
-    <div> 
-      <input
-        value = {filters}
-        onChange={ (e) => setFilters(e.target.value) }
-      >
-      </input>
+    <div>
       <h1>Users</h1>
-      {users &&
-          users
-            .filter(user => 
-              user.email.includes(filters) ||
-              user.login.username.includes(filters) ||
-              user.name.first.includes(filters) ||
-              user.name.last.includes(filters))
-            .map(user => (
-              <div
-                key={user.email}
-                // style={{
-                //   display: "inline-block"
-                // }}
-              >
-                <img src={user.picture.medium} />
-                <div>Name: {`${user.name.title} ${user.name.first} ${user.name.last}`}</div>
-                <div>E-mail: {user.email}</div>
-                <div>Username: {user.login.username}</div>
-                <div>Age: {user.dob.age}</div>
-              </div>
-            ))}
+      {isLoading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <>
+          <input
+            value = {filters}
+            onChange={ (e) => setFilters(e.target.value) }
+          >
+      </input>
+          <Users users={users} page={page} filters={filters} usersBase={usersBase} />
+          <Pagination
+            totalPages={totalPages}
+            handleClick={handleClick}
+            page={page}
+          />
+        </>
+      )}
     </div>
   );
-}
+};
