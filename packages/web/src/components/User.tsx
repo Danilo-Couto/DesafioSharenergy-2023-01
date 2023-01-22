@@ -1,7 +1,6 @@
 import React from "react";
 
 export default function User(user) {
-  console.log(user)
   return (
     <div>
       <img src={user.picture.medium} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Pagination ({ totalPages, handleClick, page }) {
+function Pagination ({ totalPages, handleClick }) {
   const pages = [...Array(totalPages).keys()].map(number => number + 1);
 
   return (

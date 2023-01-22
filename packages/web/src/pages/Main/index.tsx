@@ -46,7 +46,6 @@ export default function Main() {
           <Pagination
             totalPages={totalPages}
             handleClick={handleClick}
-            page={page}
           />
         </>
       )}
