@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 
 export default function RandomDog() {
   const [isLoading, setIsLoading] = useState(false);
   const [imgDog, setImgDog] = useState('');
 
-  const generateImg = () => {
+  const generateImg = async () => {
     axios
     .get('https://random.dog/woof.json')
     .then(res => {
-      const result = res.data.url;
-      setImgDog(result);
+      setImgDog(res.data.url);
     });
   } 
 
@@ -20,26 +19,30 @@ export default function RandomDog() {
     setIsLoading(false);
   }, []);
 
-  if (imgDog.endsWith('.mp4')){
-    console.log('image is mp4')
-    generateImg()
-  };
+  // if (imgDog.endsWith('.mp4')){
+  //   console.log('image is mp4');
+  // };
 
   return (
     <>
       <h1>RANDOM DOG</h1>
-      <button onClick={generateImg}>New Dog Image</button>
+      <button onClick={generateImg}>New Dog Image
+      </button>
       <div>
         {
-          // imgDog.endsWith('.mp4') ?
-          // (<div> Your image didnt show. Refresh Again...</div>):
-        isLoading ?
-          ( <div className="loading">Loading...</div>):
-        <img
-          src={`${imgDog}`}
-          alt={`${imgDog}`}
-      />
-    }
+          imgDog.endsWith('.mp4') ?
+          <video width="500" height="250" 
+              // ref={videoEl}
+              controls
+              autoPlay
+            >
+            <source src={imgDog} type="video/mp4"/>
+          </video>
+          : <img
+            src={`${imgDog}`}
+            alt={`${imgDog}`} 
+          />
+        }
       </div>
     </>
   );

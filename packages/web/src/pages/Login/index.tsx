@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 
 export default function Login() {
-
   const [ishidden, setHidden] = useState(true);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
