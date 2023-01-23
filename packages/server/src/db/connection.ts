@@ -12,4 +12,4 @@ export default async function connectionDB() {
   
 // user = danilo-couto
 // mongosb pass = DIxA1n0JI3PxKRhE
-// https://www.youtube.com/watch?v=anMK76I2dUA
+// referencia: https://www.youtube.com/watch?v=anMK76I2dUA

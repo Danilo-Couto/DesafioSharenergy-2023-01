@@ -32,7 +32,6 @@ export default function RandomDog() {
         {
           imgDog.endsWith('.mp4') ?
           <video width="500" height="250" 
-              // ref={videoEl}
               controls
               autoPlay
             >
