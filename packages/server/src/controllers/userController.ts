@@ -66,7 +66,7 @@ const userController = {
                 cpf: req.body.cpf,
             };
 
-            const response = await UserModel.findByIdAndUpdate(id)
+            const response = await UserModel.findByIdAndUpdate(id, service)
 
             if (!response) {
                 res.status(404).json({msg: 'User not found!'});
