@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Pagination from "../../components/Pagination";
 import Users from "../../components/Users";
-import { USERS_PER_PAGE } from "../../utils/constants";
+import { URL_API_USERS, USERS_PER_PAGE } from "../../utils/constants";
 
 export default function Main() {
   const [users, setUsers] = useState([]);
@@ -16,9 +16,9 @@ export default function Main() {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get('https://randomuser.me/api/?page=1&results=100')
-      .then(response => {
-        const result = response.data.results;
+      .get(URL_API_USERS)
+      .then(res => {
+        const result = res.data.results;
         setUsers(result);
         setUsersBase(result);
         setTotalPages(Math.ceil(result.length / USERS_PER_PAGE));
@@ -26,27 +26,24 @@ export default function Main() {
       });
   }, []);
 
-  const handleClick = number => {
-    setPage(number);
-  };
+  const handleClick = (number: number) => setPage(number);
 
   return (
     <div>
       <h1>Users</h1>
-      {isLoading ? (
-        <div className="loading">Loading...</div>
-      ) : (
+      {isLoading ? <div className="loading">Loading...</div>
+      : (
         <>
           <input
             value = {filters}
             onChange={ (e) => setFilters(e.target.value) }
           >
-      </input>
+        </input>
           <Users users={users} page={page} filters={filters} usersBase={usersBase} />
           <Pagination
             totalPages={totalPages}
             handleClick={handleClick}
-          />
+        />
         </>
       )}
     </div>

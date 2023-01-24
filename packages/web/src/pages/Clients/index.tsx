@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { URL_API_USERS } from "../../utils/constants";
+import { URL_API_CLIENTS } from "../../utils/constants";
 import DisplayUsers from "../../components/DisplayUsers";
 import EditingForm from "../../components/EditingForm";
 
@@ -20,7 +20,7 @@ export default function Clients() {
 
   const fetchUsers = async () => {
     axios
-    .get(URL_API_USERS)
+    .get(URL_API_CLIENTS)
     .then(res => {
       setUsers(res.data);
     });
@@ -36,10 +36,10 @@ export default function Clients() {
     
   const createUser = async (e: { preventDefault: () => void; }) => {
     e.preventDefault(); 
-    await axios.post(URL_API_USERS, userState); 
+    await axios.post(URL_API_CLIENTS, userState); 
   };
   
-  const deleteUser = async ({target}) => await axios.delete(`${URL_API_USERS}/${target.value}`);
+  const deleteUser = async ({target}) => await axios.delete(`${URL_API_CLIENTS}/${target.value}`);
   
   const toogleEditForm = ({target}) => {
     setIdUserEdited(target.value);
@@ -48,7 +48,7 @@ export default function Clients() {
     
   const updateUser = async (e: { preventDefault?: any; target: any; }) => {
       e.preventDefault();
-      await axios.put(`${URL_API_USERS}/${idUserEdited}`, userState);
+      await axios.put(`${URL_API_CLIENTS}/${idUserEdited}`, userState);
       toogleEditForm(e);      
   };
    

@@ -15,7 +15,6 @@ function App() {
         <Route path="/random-cat" element={ <RandomCat/> }></Route>
         <Route path="/random-dog" element={ <RandomDog/> }></Route>
         <Route path="/clients" element={ <Clients/> }></Route>
-        {/* <Route path="/error" element={Error} /> */}
       </Routes>
     </main>
   );

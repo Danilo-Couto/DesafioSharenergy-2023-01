@@ -10,18 +10,18 @@ const Users = ({ users, page, filters, usersBase }) => {
     <>
       {
         filters ? (
-          usersBase.filter(user => 
+          usersBase.filter((user: any) => 
             user.email.includes(filters) ||
             user.login.username.includes(filters) ||
             user.name.first.includes(filters) ||
             user.name.last.includes(filters) ||
             user.location.country.includes(filters)
-          ).map(user => (
+          ).map((user: any) => (
             <User key={user.login.uuid} {...user} />
           ))
         ) : (
         displayedUsers
-        .map(user => (
+        .map((user: any) => (
           <User key={user.login.uuid} {...user} />
         )))
       }

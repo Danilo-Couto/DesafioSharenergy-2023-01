@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { getLocalStorage, setLocalStorage } from "../../utils/localStorage";
 
 export default function Login() {
-  const [ishidden, setHidden] = useState(true);
   const [user, setUser] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword] = useState(false);
@@ -11,13 +10,13 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // const localStorage = getLocalStorage('user');
-    // if (localStorage) {
-    //   navigate('/main');
-    // }
+    const localStorage = getLocalStorage('user');
+    if (localStorage) {
+      navigate('/main');
+    }
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
   if (user === 'desafiosharenergy' && password ==='sh@r3n3rgy') {
@@ -29,39 +28,27 @@ export default function Login() {
   return (
     <>
      <form>
-        <header>User</header>
         <input
-          onChange={ (e) => setUser(e.target.value) }
+          onChange={ ({target}) => setUser(target.value) }
           className="user"
           type="text"
           placeholder="user"
         />
         <header> Senha </header>
         <input
-          onChange={ (e) => setPassword(e.target.value) }
+          onChange={ ({target}) => setPassword(target.value) }
           className="password"
           type={ showPassword ? 'text' : 'password' }
           placeholder="******"
         />
         <button
           onClick={ handleSubmit }
-          disabled={ !user }
+          disabled={ !user || !password} 
           type="button"
         >
           Entrar
         </button>
-        <button
-          type="button"
-          onClick={ () => navigate('/register') }
-        >
-          Ainda não tenho conta
-        </button>
-        <p
-          hidden={ ishidden }
-        >
-          Mensagem de erro
-        </p>
       </form>
     </>
   );
-}
+};
