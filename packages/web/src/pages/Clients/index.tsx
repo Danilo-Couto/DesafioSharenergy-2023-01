@@ -64,7 +64,7 @@ export default function Clients() {
 
   return (
     <>
-      <h1>CLIENTS</h1>
+      <h1>USERS</h1>
       {isEditing ? editingForm : displayUser }
     </>
   );

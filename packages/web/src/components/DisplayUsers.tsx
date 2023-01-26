@@ -1,9 +1,12 @@
 import React from 'react';
+import styles from '../styles/clients.module.css';
 
 function DisplayUsers ({createUser, userState, handleChange, isLoading, users, deleteUser, toogleEditForm}) {
   return (
-<>
-    <form onSubmit={createUser}>
+  <div>
+    <form onSubmit={createUser}
+      className={styles.div_inputs}
+    >
       <input
         type="text" required placeholder="nome"
         onChange={(e) => handleChange(e)}
@@ -25,28 +28,32 @@ function DisplayUsers ({createUser, userState, handleChange, isLoading, users, d
         onChange={(e) => handleChange(e)}
         name={'endereco'}
         defaultValue={userState.endereco} />
-      <button type="submit">Adicionar Novo Usuário</button>
-    </form><div>
+      <button
+      className={styles.add_button}
+      type="submit">Adicionar Novo Usuário</button>
+    </form>
+      <div className={styles.div_users} >
         {
         isLoading ? <div className="loading">Loading...</div> 
         : users && users.map((user: any, i: number) => (
-          <div key={i} >
+          <div key={i} 
+          className={styles.div_user}
+          >
             <p>Nome: {user.nome}</p>
             <p>E-Mail: {user.email}</p>
             <p>Telefone: {user.telefone}</p>
             <p>CPF: {user.cpf}</p>
             <p>Endereço: {user.endereco}</p>
-            <button className="delete" type="button"
+            <button className={styles.delete_button} type="button"
               onClick={deleteUser} value={user._id}>Deletar
             </button>
-            <button className="edit" type="button"
+            <button className={styles.update_button} type="button"
               value={user._id}
               onClick={toogleEditForm}>Editar tarefa</button>
-            <p>---</p>
           </div>
         ))}
       </div>
-    </>
+    </div>
     );
 };
 

@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -17,8 +18,15 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          isDevelopment ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader"
+          ]
         }
-      }
     ]
   },
   devServer: {
@@ -35,6 +43,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html')
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin()
+    isDevelopment && 
+    new ReactRefreshWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "assets/css/[name].[contenthash:8].css",
+      chunkFilename: "assets/css/[name].[contenthash:8].chunk.css"
+      })
   ].filter(Boolean)
 }
