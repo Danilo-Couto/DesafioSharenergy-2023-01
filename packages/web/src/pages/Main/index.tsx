@@ -4,6 +4,7 @@ import axios from "axios";
 import Pagination from "../../components/Pagination";
 import Users from "../../components/Users";
 import { URL_API_USERS, USERS_PER_PAGE } from "../../utils/constants";
+import styles from '../../styles/users.module.css';
 
 export default function Main() {
   const [users, setUsers] = useState([]);
@@ -38,12 +39,12 @@ export default function Main() {
             value = {filters}
             onChange={ (e) => setFilters(e.target.value) }
           >
-        </input>
+          </input>
           <Users users={users} page={page} filters={filters} usersBase={usersBase} />
           <Pagination
             totalPages={totalPages}
             handleClick={handleClick}
-        />
+          />
         </>
       )}
     </div>

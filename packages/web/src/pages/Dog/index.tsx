@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
+import styles from '../../styles/dogs.module.css';
 
 export default function RandomDog() {
   const [imgDog, setImgDog] = useState('');
@@ -19,7 +20,7 @@ export default function RandomDog() {
   return (
     <>
       <h1>RANDOM DOG</h1>
-      <button onClick={generateImg}>New dog image
+      <button className={styles.new_dog_button} onClick={generateImg}>New dog image
       </button>
       <div>
         {
