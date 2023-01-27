@@ -9,9 +9,7 @@ function Pagination ({ totalPages, handleClick }) {
       {pages.map(number => (
         <a className={styles.pagination}
           key={number}
-          // href=""
           onClick={() => handleClick(number)}
-          // className={`${page === number && 'active'}`}
         >
           {number}
         </a>
