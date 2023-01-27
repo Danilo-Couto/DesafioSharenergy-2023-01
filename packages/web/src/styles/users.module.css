@@ -1,0 +1,27 @@
+.div_users {
+    display: flex;
+    margin: 15px;
+    padding: 5px;
+    flex-wrap: wrap;
+}
+
+.div_user {
+    margin: 15px;
+    padding: 5px;
+    width: 250px;
+    background-color: rgb(234, 255, 127);
+}
+
+.div_user img {
+    width: 250px;
+}
+
+.pagination {
+    color: inherit;
+    text-decoration:underline;
+    padding: 5px;
+    cursor: pointer;
+  }
+
+@media (max-width: 1000px) { 
+}

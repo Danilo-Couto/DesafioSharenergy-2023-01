@@ -1,0 +1,12 @@
+.container {
+    max-width: 100%;
+}
+
+.new_dog_button {
+    background-color: rgb(129, 0, 0);
+    width: 50%;
+    margin: 10px;
+}
+
+@media (max-width: 1000px) { 
+}
